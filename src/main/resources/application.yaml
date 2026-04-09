@@ -1,0 +1,14 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/todolist
+    username: devlil0
+    password: 7020
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
