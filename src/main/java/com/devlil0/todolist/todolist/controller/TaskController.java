@@ -1,6 +1,7 @@
 package com.devlil0.todolist.todolist.controller;
 
 import com.devlil0.todolist.todolist.dto.TaskDTO;
+import com.devlil0.todolist.todolist.dto.TaskResponseDTO;
 import com.devlil0.todolist.todolist.mapper.TaskMapper;
 import com.devlil0.todolist.todolist.service.TaskService;
 import jakarta.validation.Valid;
@@ -21,13 +22,13 @@ public class TaskController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<TaskDTO> findAll(){
+    public List<TaskResponseDTO> findAll(){
         return taskMapper.toDTO();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public TaskDTO findTask(@PathVariable Long id){
+    public TaskResponseDTO findTask(@PathVariable Long id){
         return taskService.findById(id);
     }
 

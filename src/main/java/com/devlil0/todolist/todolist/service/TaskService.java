@@ -3,6 +3,8 @@ package com.devlil0.todolist.todolist.service;
 import com.devlil0.todolist.todolist.database.model.TaskEntity;
 import com.devlil0.todolist.todolist.database.repository.ITaskRepository;
 import com.devlil0.todolist.todolist.dto.TaskDTO;
+import com.devlil0.todolist.todolist.dto.TaskResponseDTO;
+import com.devlil0.todolist.todolist.exception.NotFoundException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -30,7 +32,7 @@ public class TaskService {
     }
 
     public void updateTask(TaskDTO dto, Long id){
-        TaskEntity task = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("NOT FOUND"));
+        TaskEntity task = taskRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
 
         task.setName(dto.getName());
         task.setDescription(dto.getDescription());
@@ -38,12 +40,17 @@ public class TaskService {
         taskRepository.save(task);
     }
 
-    public TaskDTO findById(Long id){
-        TaskEntity task = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("NOT FOUND"));
+    public TaskResponseDTO findById(Long id){
+        TaskEntity task = taskRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
 
-        return TaskDTO.builder()
-                .name(task.getName())
-                .description(task.getDescription())
-                .build();
+        TaskResponseDTO dto = new TaskResponseDTO();
+        dto.setId(task.getId());
+        dto.setName(task.getName());
+        dto.setDescription(task.getDescription());
+        dto.setOverDue(task.isOverdue());
+        dto.setCreatedAt(task.getCreatedAt());
+        dto.setUpdateAt(task.getUpdateAt());
+
+        return dto;
     }
 }

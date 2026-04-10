@@ -1,9 +1,7 @@
 package com.devlil0.todolist.todolist.dto;
 
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDate;
 
@@ -12,16 +10,18 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Builder
-public class TaskDTO {
+public class TaskResponseDTO {
 
-    @NotBlank
-    @Length(max = 30)
+    private Long id;
+
     private String name;
 
-    @NotBlank
-    @Length(max = 130)
     private String description;
 
+    private LocalDate createdAt;
 
+    private LocalDate updateAt;
+
+    private boolean overDue;
 
 }

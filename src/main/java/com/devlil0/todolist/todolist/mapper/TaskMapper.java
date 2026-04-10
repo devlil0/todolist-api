@@ -3,7 +3,7 @@ package com.devlil0.todolist.todolist.mapper;
 
 import com.devlil0.todolist.todolist.database.model.TaskEntity;
 import com.devlil0.todolist.todolist.database.repository.ITaskRepository;
-import com.devlil0.todolist.todolist.dto.TaskDTO;
+import com.devlil0.todolist.todolist.dto.TaskResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,18 +16,20 @@ public class TaskMapper {
 
     private final ITaskRepository taskRepository;
 
-    public List<TaskDTO> toDTO(){
+    public List<TaskResponseDTO> toDTO(){
 
         List<TaskEntity> tasks = taskRepository.findAll();
-        List<TaskDTO> taskDTO = new ArrayList<>();
+        List<TaskResponseDTO> taskDTO = new ArrayList<>();
 
         for(TaskEntity task: tasks){
 
-            taskDTO.add(TaskDTO.builder()
-                    .name(task.getName())
-                    .description(task.getDescription())
-                    .build());
-
+            TaskResponseDTO dto = new TaskResponseDTO();
+            dto.setId(task.getId());
+            dto.setName(task.getName());
+            dto.setDescription(task.getDescription());
+            dto.setOverDue(task.isOverdue());
+            dto.setCreatedAt(task.getCreatedAt());
+            dto.setUpdateAt(task.getUpdateAt());
         }
 
         return taskDTO;
