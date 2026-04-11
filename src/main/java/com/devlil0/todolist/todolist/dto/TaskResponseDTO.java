@@ -1,9 +1,10 @@
 package com.devlil0.todolist.todolist.dto;
 
 
+import com.devlil0.todolist.todolist.enums.Priority;
+import com.devlil0.todolist.todolist.enums.Status;
 import lombok.*;
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,10 +19,14 @@ public class TaskResponseDTO {
 
     private String description;
 
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
-    private LocalDate updateAt;
+    private LocalDateTime updatedAt;
 
     private boolean overDue;
+
+    private Status status;
+
+    private Priority priority;
 
 }

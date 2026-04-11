@@ -2,6 +2,7 @@ package com.devlil0.todolist.todolist.controller;
 
 import com.devlil0.todolist.todolist.dto.TaskDTO;
 import com.devlil0.todolist.todolist.dto.TaskResponseDTO;
+import com.devlil0.todolist.todolist.enums.Priority;
 import com.devlil0.todolist.todolist.mapper.TaskMapper;
 import com.devlil0.todolist.todolist.service.TaskService;
 import jakarta.validation.Valid;
@@ -48,6 +49,18 @@ public class TaskController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTask(@PathVariable Long id){
         taskService.deleteTask(id);
+    }
+
+    @GetMapping("/{id}/done")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateStatus(@PathVariable Long id){
+        taskService.updateStatus(id);
+    }
+
+    @PatchMapping("/{id}/priority")
+    @ResponseStatus(HttpStatus.OK)
+    public void updatePriority(@PathVariable Long id, @RequestParam Priority priority){
+        taskService.updatePriority(id, priority);
     }
 
 }

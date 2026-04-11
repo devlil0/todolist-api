@@ -29,7 +29,11 @@ public class TaskMapper {
             dto.setDescription(task.getDescription());
             dto.setOverDue(task.isOverdue());
             dto.setCreatedAt(task.getCreatedAt());
-            dto.setUpdateAt(task.getUpdateAt());
+            dto.setUpdatedAt(task.getUpdatedAt());
+            dto.setStatus(task.getStatus());
+            dto.setPriority(task.getPriority());
+
+            taskDTO.add(dto);
         }
 
         return taskDTO;
